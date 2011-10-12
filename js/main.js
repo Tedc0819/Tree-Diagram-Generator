@@ -1,2 +1,3 @@
-Drawer.draw_link();Drawer.draw_node();
-Drawer.draw_node2();
+Drawer.draw_link();
+Drawer.draw_node();
+Drawer.text_logic(1,2,3,4);
