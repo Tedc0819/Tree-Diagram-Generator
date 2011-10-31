@@ -2,3 +2,16 @@
 {
 	border: 5px solid;
 }
+#log
+{
+	border: 5px solid;
+	width: 500px;
+	height: 500px;
+}
+#text
+{
+	width:auto;
+	height:auto;
+	display:none;
+	font-family:Arial;
+}
