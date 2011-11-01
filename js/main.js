@@ -1,4 +1,7 @@
 Drawer.draw_node();
+var node = new Node("adf",13,131);
+
+
 
 
 /*

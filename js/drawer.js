@@ -6,12 +6,12 @@ BEST_HEIGHT= 100;
 ADDITIONAL_WIDTH = 25;
 WIDTH_TO_INC_MAX_LINE = 50;
 BEST_NO_OF_LINE = 3;
-MIN_FONT_SIZE = 12;
+MIN_FONT_SIZE = 18;
 MAX_FONT_SIZE = 20;
 
 /////Text Box
-HORI_PADDING = 10;
-VERT_PADDING = 0;
+HORI_PADDING = 15;
+VERT_PADDING = 10;
 VERT_INTERVAL = 0;
 
 var Canvas = new function(){
@@ -29,16 +29,12 @@ var Drawer = new function(){
 		// node input
 		var x = 200;
 		var y = 200;
-		var text = "Contradiction";
-		//
+		var text = "CoFAD";
 		var result = this.text_logic(text);
-		
-		text_size = 12;
-		text_font = "abc";	
-		text_color = "black";
-	//	 this.draw_boundary(200,200,result["width"],result["height"]);
-		var text_box = this.draw_text_box(200,200,result["width"],result["height"],true);	
-		
+	 	this.draw_boundary(200,200,result["width"] + HORI_PADDING * 2,result["height"] + VERT_PADDING * 2);		
+		var text_box = this.draw_text_box(200,200,result["width"],result["height"],false);			
+
+
 		var text = this.draw_text(text_box,result["array_of_text"],result["font_size"]);
 		
 
@@ -47,9 +43,9 @@ var Drawer = new function(){
 	}
 	
 	this.draw_text = function (text_box,array_of_text,font_size){
-		ctx.fillStyle = text_color;
+		ctx.fillStyle = "black";
 		ctx.textAlign = "center";
-		ctx.font = font_size + "pt " + "Arial";
+		ctx.font = font_size + "px " + "Arial";
 		var params = []
 		for(i = 0 ;i < array_of_text.length;i++)
 		{
@@ -61,7 +57,7 @@ var Drawer = new function(){
 			params[i]["x"] = x;
 			params[i]["y"] = y;
 		}
-		console.log(params);
+		console.log(font_size);
 		return params;
 		
 	}
@@ -231,7 +227,7 @@ var Drawer = new function(){
 	}
 	this.get_width_of = function (array,font_size) {
 		var result = 0;
-
+		$("#text").css("font-size",font_size);
 		for (i=0; i<array.length;i++){
 			$("#text").html(array[i]);
 				
@@ -244,6 +240,7 @@ var Drawer = new function(){
 		//debugged
 		}
 		console.log("Get Width of :" + result);
+
 		return result;
 	}
 	this.get_height_of = function (array,font_size)
