@@ -12,13 +12,13 @@ function Node(text,x,y)
 		this.y = y;
 	}
 
-	//Class method
-	
-	Node.all = function ()
+	this.getHash = function()
 	{
-		return 
+		return {id:this.id, text:this.text, x:this.x, y:this.y};
 	}
-	
+
+	//Class method
+
 	Node.generate_id = function()
 	{
 		Node.id_counter += 1;
@@ -31,7 +31,9 @@ function Node(text,x,y)
 	this.keys = new Array();
 	this.keys["id"] = function (){ return self.id}
 	//save
-
+	Node.container.create(this.getHash());
 
 }
 Node.id_counter = 0;
+Node.container = new Container("Node");
+
