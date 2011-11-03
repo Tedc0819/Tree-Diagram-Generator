@@ -11,7 +11,7 @@ function Node(text,x,y)
 		this.x = x;
 		this.y = y;
 	}
-
+	
 	this.getHash = function()
 	{
 		return {id:this.id, text:this.text, x:this.x, y:this.y};
@@ -27,9 +27,6 @@ function Node(text,x,y)
 	
 	//before save
 	this.id = Node.generate_id();
-
-	this.keys = new Array();
-	this.keys["id"] = function (){ return self.id}
 	//save
 	Node.container.create(this.getHash());
 

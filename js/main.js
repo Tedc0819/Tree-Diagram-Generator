@@ -1,6 +1,11 @@
 Drawer.draw_node();
 var node = new Node("adf",13,131);
 var node2 = new Node("adf",13,13311);
+
+console.log(Node.container.database);
+
+
+/*
 node.id = 13;
 
 console.log(node.getHash());
@@ -10,6 +15,7 @@ temp.database["0"]["id"] = 4;
 
 console.log(Node.container.database);
 console.log(temp.database);
+*/
 /*
 result = Drawer.text_logic("Hefas fasdjfas fklasfs fajsd adsfj;dksfj;asdj flsdjfh sflsdf asdjf  jfalksj sdfjsdkfj ");
 for (i in result)

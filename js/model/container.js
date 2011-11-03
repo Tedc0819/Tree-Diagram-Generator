@@ -5,6 +5,9 @@ function Container(cate)
 	
 	this.insert = function(){}
 	this.destroy = function(){}
+	this.update = function(hash){
+	}
+	
 	
 	this.find = function (key,value){
 		var result = new Container(this.category);
@@ -15,19 +18,33 @@ function Container(cate)
 			}
 			
 		}
-		
+		return result;
+		//test: debug 
 	}
 	
+	this.if_empty = function(){
+		if (this.database.length == 0 )
+			{return true;}
+		else 
+			{return false;}
+	}
 	
-	this.update = function(hash){
-	}	
+	this.first = function(){
+		return this.database[0];
+	}
 	
 	this.create = function(hash){
-		var temp_hash = $.extend({},hash);
-		this.database.push(temp_hash);
-		console.log(cate + "has added a new object: " );
-		console.log(this.database[this.database.length-1]);
-		return hash;
+		//validates id
+		if (this.find("id",hash["id"]).if_empty())
+		{
+			var temp_hash = $.extend({},hash);
+			this.database.push(temp_hash);
+			console.log(cate + "has added a new object: " );
+			console.log(this.database[this.database.length-1]);
+			return true;
+		}
+		else 
+		{return false;}
 		//test : success
 	}
 	
@@ -38,8 +55,8 @@ function Container(cate)
 			result.create(this.database[i]);
 		}
 		return result;
+		//test: debug
 	}
-	
 	
 	this.all = function()
 	{	
