@@ -4,8 +4,20 @@ function Container(cate)
 	this.database = new Array();
 	
 	this.insert = function(){}
-	this.destroy = function(){}
+	this.destroy = function(node_id){
+
+	}
 	this.update = function(hash){
+		var not_found = this.find("id",hash["id"]).if_empty();
+		
+		if (!not_found) {
+			for(i =0 ; i <this.database.length ; i++)
+			{
+				if (database[i]["id"]== hash["id"])
+				{break;}
+			}
+			this.database.splice(i,1,hash);
+		}
 	}
 	
 	
@@ -35,6 +47,9 @@ function Container(cate)
 	
 	this.create = function(hash){
 		//validates id
+		console.log("");
+		console.log("Function called - Container - create:");
+		
 		if (this.find("id",hash["id"]).if_empty())
 		{
 			var temp_hash = $.extend({},hash);

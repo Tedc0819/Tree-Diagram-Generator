@@ -1,8 +1,9 @@
-Drawer.draw_node();
-var node = new Node("adf",13,131);
-var node2 = new Node("adf",13,13311);
+test_container();
 
-console.log(Node.container.database);
+Drawer.draw_node();
+
+
+//console.log(Node.container.database);
 
 
 /*
