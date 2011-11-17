@@ -7,9 +7,9 @@ function test_container()
 	var node2 = new Node("adf",13,13311);
 	
 	if (Node.container.all().length == 2)
-	{console.log("");console.log("Test - Container - create - matching number of cells - sucess");}
+	{console.log("Test - Container - create - matching number of cells - sucess");}
 	else
-	{console.log("");console.log("Test - Container - create - matching number of cells - fail");}
+	{console.log("Test - Container - create - matching number of cells - fail");}
 	
 	//test function clone_to_container
 	//Case 1 ; Matching data of cells
@@ -39,9 +39,9 @@ function test_container()
 	{match = false;}
 
 	if (match)
-	{console.log("");console.log("Test - Container - clone_to_container - matching data of cells - success");}
+	{console.log("Test - Container - clone_to_container - matching data of cells - success");}
 	else
-	{console.log("");console.log("Test - Container - clone_to_container - matching data of cells - fail");}
+	{console.log("Test - Container - clone_to_container - matching data of cells - fail");}
 	
 	//Case 2 : Confirm: is a clone , not the same object
 	result.database[0]["x"] = 100;
@@ -58,29 +58,63 @@ function test_container()
 	{
 		success = false;
 	}
+	result = null;
+	
 	if (success)
-	{console.log("");console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - success");}
+	{console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - success");}
 	else
-	{console.log("");console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - fail");}
+	{console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - fail");}
+	
+	/// test function update 
+    var temp = Node.container.database.length;
+	node.text = "car";
+	node.save();
+	var success = true;
+	if (node.text != Node.container.database[0]["text"])
+	{
+		success = false;
+	}
+	if (Node.container.database.length != temp )
+	{
+		success = false;
+	}
+	if (success)
+	{console.log("Test - Container - update - success");}
+	else
+	{console.log("Test - Container - update - fail");}
+	
+	/// test function destroy
+    var temp = Node.container.database.length;
+	node.destroy();
+	if (Node.container.database.length == temp )
+	{
+		success = false;
+	}
+	if (!(Node.container.find(["id"],node.id).if_empty()))
+	{
+		success = false;
+	}
+	if (success)
+	{console.log("Test - Container - destroy - success");}
+	else
+	{console.log("Test - Container - destroy - fail");}
 	
 	
+	///test function get
+	var node3 = new Node("adf",13,131);
+	var node2 = new Node("adf",13,13311);
+	var node = new Node("adf",13,131);
+	var node2 = new Node("adf",13,13311);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	success = false;
+	if (Node.container.get(1)["obj"] == node3)
+	{
+		success = true;
+	}
+
+	if (success)
+	{console.log("Test - Container - get - success");}
+	else
+	{console.log("Test - Container - get - fail");}
+		
 }

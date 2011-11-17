@@ -14,10 +14,25 @@ HORI_PADDING = 15;
 VERT_PADDING = 10;
 VERT_INTERVAL = 0;
 
+// canvas constant
+CANVAS_HORI_PADDING = 20;
+CANVAS_VERT_PADDING = 20;
+
+
 var Canvas = new function(){
 	var canvas = document.getElementById("tree_diagram");  
 	this.context = canvas.getContext("2d");
 	this.ClearContext = function(){}
+	this.adjust_size = function(height, width){
+		$('#tree_diagram').attr('height', height);
+		$('#tree_diagram').attr('width', width);		
+	}
+	this.adjust_size_fitting_window = function(){
+		var width = $(window).width() - CANVAS_HORI_PADDING *2;
+		var height = $(window).height()- CANVAS_VERT_PADDING *2;  
+		this.adjust_size(height, width);
+	}
+	
 }
 
 
@@ -25,21 +40,15 @@ var Canvas = new function(){
 var Drawer = new function(){
 	this.ctx = Canvas.context;
 	var ctx = this.ctx;
-	this.draw_node = function (){
+	this.draw_node = function (node){
 		// node input
-		var x = 200;
-		var y = 200;
-		var text = "CoFAD";
+		var x = node.x;
+		var y = node.y;
+		var text = node.text;
 		var result = this.text_logic(text);
-	 	this.draw_boundary(200,200,result["width"] + HORI_PADDING * 2,result["height"] + VERT_PADDING * 2);		
-		var text_box = this.draw_text_box(200,200,result["width"],result["height"],false);			
-
-
+	 	this.draw_boundary(x,y,result["width"] + HORI_PADDING * 2,result["height"] + VERT_PADDING * 2);		
+		var text_box = this.draw_text_box(x,y,result["width"],result["height"],false);			
 		var text = this.draw_text(text_box,result["array_of_text"],result["font_size"]);
-		
-
-		
-
 	}
 	
 	this.draw_text = function (text_box,array_of_text,font_size){
@@ -57,9 +66,7 @@ var Drawer = new function(){
 			params[i]["x"] = x;
 			params[i]["y"] = y;
 		}
-		console.log(font_size);
 		return params;
-		
 	}
 	this.draw_link = function(){
 			ctx = this.ctx;
@@ -115,7 +122,7 @@ var Drawer = new function(){
 		params["x"] = x;
 		params["y"] = y;
 		
-		console.log("Textbox x:"+ params["x"]+ " y:"+ params["y"] +" height:"+ params["height"] +" width:" +params["width"]);
+//		console.log("Textbox x:"+ params["x"]+ " y:"+ params["y"] +" height:"+ params["height"] +" width:" +params["width"]);
 		return params;
 	}	
 	this.text_logic = function(text){
@@ -235,12 +242,9 @@ var Drawer = new function(){
 			if ($("#text").outerWidth() > result)
 			{ 
 				result = $("#text").outerWidth();
-				console.log("Get Width of :" + result + "i" + i);
 			}
 		//debugged
 		}
-		console.log("Get Width of :" + result);
-
 		return result;
 	}
 	this.get_height_of = function (array,font_size)
@@ -248,12 +252,8 @@ var Drawer = new function(){
 		var result = 0;
 		for (i=0;i < array.length; i++)
 		{
-//			$("#text").html(array[i]);
-//			$("#text").css("font-size",18);
-//			result += $("#text").outerHeight();
 			result += font_size;
 		}
-		console.log("Get Height Of :" + result);
 		return result;
 	}
 }

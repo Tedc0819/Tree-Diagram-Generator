@@ -5,21 +5,37 @@ function Container(cate)
 	
 	this.insert = function(){}
 	this.destroy = function(node_id){
+			var not_found = this.find("id",node_id).if_empty();
 
+			if (!not_found) {
+				for(i =0 ; i < this.database.length ; i++)
+				{
+					if (this.database[i]["id"]== node_id)
+					{break;}
+				}
+				this.database.splice(i,1);
+				return true;
+			}
+			return false;
 	}
 	this.update = function(hash){
 		var not_found = this.find("id",hash["id"]).if_empty();
 		
 		if (!not_found) {
-			for(i =0 ; i <this.database.length ; i++)
+			for(i =0 ; i < this.database.length ; i++)
 			{
-				if (database[i]["id"]== hash["id"])
+				if (this.database[i]["id"]== hash["id"])
 				{break;}
 			}
 			this.database.splice(i,1,hash);
+			return true;
 		}
+		return false;
 	}
 	
+	this.get = function(index){
+		return this.database[index];
+	}
 	
 	this.find = function (key,value){
 		var result = new Container(this.category);
@@ -47,15 +63,11 @@ function Container(cate)
 	
 	this.create = function(hash){
 		//validates id
-		console.log("");
-		console.log("Function called - Container - create:");
 		
 		if (this.find("id",hash["id"]).if_empty())
 		{
 			var temp_hash = $.extend({},hash);
 			this.database.push(temp_hash);
-			console.log(cate + "has added a new object: " );
-			console.log(this.database[this.database.length-1]);
 			return true;
 		}
 		else 

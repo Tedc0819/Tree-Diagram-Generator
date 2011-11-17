@@ -10,13 +10,21 @@ function Node(text,x,y)
 	this.moveTo = function(x,y){
 		this.x = x;
 		this.y = y;
+		return this.save();
 	}
 	
 	this.getHash = function()
 	{
-		return {id:this.id, text:this.text, x:this.x, y:this.y};
+		return {id:this.id, text:this.text, x:this.x, y:this.y, obj:this};
 	}
-
+	
+	//container related method
+	this.save = function(){
+		return Node.container.update(this.getHash()); 
+	}
+	this.destroy = function(){
+		Node.container.destroy(this.id);
+	}
 	//Class method
 
 	Node.generate_id = function()
