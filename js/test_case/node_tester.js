@@ -15,5 +15,18 @@ function test_node()
 		console.log("Test - Node - moveTo - fail");
 	}
 	
+	// Test: node - clone 
+	var new_node = node.clone();
+	
+	new_node.moveTo(100,100);
+	if (new_node.x != node.x)
+	{
+		console.log("Test - Node - clone - success");
+	}
+	else 
+	{
+		console.log("Test - Node - clone - fail");
+	}
+
 	
 }

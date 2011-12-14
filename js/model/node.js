@@ -10,35 +10,27 @@ function Node(text,x,y)
 	this.moveTo = function(x,y){
 		this.x = x;
 		this.y = y;
-		return this.save();
 	}
-	
-	this.getHash = function()
-	{
-		return {id:this.id, text:this.text, x:this.x, y:this.y, obj:this};
-	}
-	
-	//container related method
-	this.save = function(){
-		return Node.container.update(this.getHash()); 
-	}
-	this.destroy = function(){
-		Node.container.destroy(this.id);
-	}
-	//Class method
 
-	Node.generate_id = function()
-	{
-		Node.id_counter += 1;
-		return Node.id_counter;
+	//container related method
+	this.destroy = function(){
+		Node.container.destroy(this);
 	}
 	
-	//before save
+	this.clone = function(){
+		var new_node = jQuery.extend(true, {}, this);
+		return new_node;
+		
+	}
+
 	this.id = Node.generate_id();
-	//save
-	Node.container.create(this.getHash());
+	Node.container.create(this);
 
 }
 Node.id_counter = 0;
 Node.container = new Container("Node");
-
+Node.generate_id = function()
+{
+	Node.id_counter += 1;
+	return Node.id_counter;
+}

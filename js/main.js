@@ -1,9 +1,13 @@
+test_container();
+test_node();
 Canvas.adjust_size_fitting_window();
 
 var node = new Node("adfdfas",200,300);
 
 node.moveTo(600,600);
 Drawer.draw_node(node);
+
+
 
 //console.log(Node.container.database);
 

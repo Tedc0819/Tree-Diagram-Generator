@@ -1,8 +1,8 @@
 function test_container()
 {
 
-	///test funtion create
-	
+///test funtion create  
+	//matching number of cells
 	var node = new Node("adf",13,131);
 	var node2 = new Node("adf",13,13311);
 	
@@ -11,110 +11,80 @@ function test_container()
 	else
 	{console.log("Test - Container - create - matching number of cells - fail");}
 	
+	//same object check
+	node.x = 300;
+	if (Node.container.all()[0].x == node.x)
+	{console.log("Test - Container - create - same object check - sucess");}
+	else
+	{console.log("Test - Container - create - same object check - fail");}
+
+//test function find 
+	//find the result 
+	if (Node.container.find("id", 1).first().id == node.id)
+	{console.log("Test - Container - find - find the result - sucess");}
+	else
+	{console.log("Test - Container - find - find the result - fail");}	
+//test funciton destroy
+	// matching Number of Cells
+	node.destroy();
+	if (Node.container.all().length == 1)
+	{console.log("Test - Container - destroy - matching number of cells - sucess");}
+	else
+	{console.log("Test - Container - destroy - matching number of cells - fail");}
+
 	//test function clone_to_container
-	//Case 1 ; Matching data of cells
-	
-	var result = Node.container.clone_to_container();
-	var match = true;
-	
-	if (result.all().length == Node.container.all().length)
-	{
-		for (i=0; i<result.all().length; i ++)
+		//Case 1 ; Matching data of cells
+
+		var result = Node.container.clone_to_container();
+		var match = true;
+
+		if (result.all().length == Node.container.all().length)
 		{
-			if (result.database[i]["id"] != Node.container.database[i]["id"])
+			for (i=0; i<result.all().length; i ++)
 			{
-				match = false;
-			}
-			if (result.database[i]["x"] != Node.container.database[i]["x"])
-			{
-				match = false;
-			}
-			if (result.database[i]["y"] != Node.container.database[i]["y"])
-			{
-				match = false;
+				if (result.database[i]["id"] != Node.container.database[i]["id"])
+				{
+					match = false;
+				}
+				if (result.database[i]["x"] != Node.container.database[i]["x"])
+				{
+					match = false;
+				}
+				if (result.database[i]["y"] != Node.container.database[i]["y"])
+				{
+					match = false;
+				}
 			}
 		}
-	}
-	else
-	{match = false;}
+		else
+		{match = false;}
 
-	if (match)
-	{console.log("Test - Container - clone_to_container - matching data of cells - success");}
-	else
-	{console.log("Test - Container - clone_to_container - matching data of cells - fail");}
-	
-	//Case 2 : Confirm: is a clone , not the same object
-	result.database[0]["x"] = 100;
-	var success = true;
-	if (result.database[0]["x"] == Node.container.database[0]["x"])
-	{
-		success = false;
-	}
-	if (result.database[0]["x"] != 100)
-	{
-		success = false;
-	}
-	if (Node.container.database[0]["x"] == 100)
-	{
-		success = false;
-	}
-	result = null;
-	
-	if (success)
-	{console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - success");}
-	else
-	{console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - fail");}
-	
-	/// test function update 
-    var temp = Node.container.database.length;
-	node.text = "car";
-	node.save();
-	var success = true;
-	if (node.text != Node.container.database[0]["text"])
-	{
-		success = false;
-	}
-	if (Node.container.database.length != temp )
-	{
-		success = false;
-	}
-	if (success)
-	{console.log("Test - Container - update - success");}
-	else
-	{console.log("Test - Container - update - fail");}
-	
-	/// test function destroy
-    var temp = Node.container.database.length;
-	node.destroy();
-	if (Node.container.database.length == temp )
-	{
-		success = false;
-	}
-	if (!(Node.container.find(["id"],node.id).if_empty()))
-	{
-		success = false;
-	}
-	if (success)
-	{console.log("Test - Container - destroy - success");}
-	else
-	{console.log("Test - Container - destroy - fail");}
-	
-	
-	///test function get
-	var node3 = new Node("adf",13,131);
-	var node2 = new Node("adf",13,13311);
-	var node = new Node("adf",13,131);
-	var node2 = new Node("adf",13,13311);
-	
-	success = false;
-	if (Node.container.get(1)["obj"] == node3)
-	{
-		success = true;
-	}
+		if (match)
+		{console.log("Test - Container - clone_to_container - matching data of cells - success");}
+		else
+		{console.log("Test - Container - clone_to_container - matching data of cells - fail");}
 
-	if (success)
-	{console.log("Test - Container - get - success");}
-	else
-	{console.log("Test - Container - get - fail");}
-		
+		//Case 2 : Confirm: is a clone , not the same object
+		result.database[0]["x"] = 100;
+		var success = true;
+		if (result.database[0]["x"] == Node.container.database[0]["x"])
+		{
+			success = false;
+		}
+		if (result.database[0]["x"] != 100)
+		{
+			success = false;
+		}
+		if (Node.container.database[0]["x"] == 100)
+		{
+			success = false;
+		}
+		result = null;
+
+		if (success)
+		{console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - success");}
+		else
+		{console.log("Test - Container - clone_to_container - Confirm: is a clone , not the same object - fail");}
+
+
 }
